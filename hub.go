@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gorilla/websocket"
@@ -34,12 +35,15 @@ func (h *Hub) run() {
 		select {
 		case client := <-h.register:
 			h.clients[client] = true
+			log.Println("Registered a new client")
 		case client := <-h.unregister:
 			if _, ok := h.clients[client]; ok {
 				delete(h.clients, client)
 				close(client.send)
+				log.Println("Unregistered a Client")
 			}
 		case message := <-h.broadcast:
+			log.Println("Broadcasting message: ", message)
 			for client := range h.clients {
 				select {
 				case client.send <- message:
