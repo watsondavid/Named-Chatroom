@@ -11,6 +11,7 @@ import (
 type Client struct {
 	hub  *Hub
 	conn *websocket.Conn
+	Name string
 	send chan []byte
 }
 
