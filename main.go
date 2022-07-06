@@ -11,7 +11,7 @@ type NewRule struct {
 
 func main() {
 	// Serve React Front-end
-	fs := http.FileServer(http.Dir("./my-app/build"))
+	fs := http.FileServer(http.Dir("./front-end/build"))
 	http.Handle("/", fs)
 
 	// Serve websocket back end
