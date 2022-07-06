@@ -108,7 +108,7 @@ func (h *Hub) run() {
 		select {
 		case client := <-h.register:
 			h.clients[client] = true
-			log.Println("Registered a new client")
+			log.Println(client.Name, " registered successfully")
 		case client := <-h.unregister:
 			if _, ok := h.clients[client]; ok {
 				delete(h.clients, client)
